@@ -218,16 +218,21 @@ void evaluate_graph(int V, Edge edges[], int num_edges, int source) {
 	}
 	printf("Correctness Verified: %s\n", is_correct ? "Yes" : "No");
 
-	// if (V >= 50) {
-	// 	printf("Too many vertices to print all final distances. Exiting now.\n");
-	// } else {
-		// final distances
-	printf("\nFinal Distances from Source %d:\n", source);
-	for (int i = 0; i < V; i++) {
-		if (dist_primary[i] == INT_MAX) printf("Vertex %d \t INF\n", i);
-		else printf("Vertex %d \t %d\n", i , dist_primary[i]);
+	if (V > 10) {
+		// printing the first 10 distances
+		printf("\nFirst 10 Distances from Source %d:\n", source);
+		for (int i = 0; i < 10; i++) {
+			if (dist_primary[i] == INT_MAX) printf("Vertex %d \t INF\n", i);
+			else printf("Vertex %d \t %d\n", i , dist_primary[i]);
+		}
+	}	else {
+		//final distances
+		printf("\nFinal Distances from Source %d:\n", source);
+		for (int i = 0; i < V; i++) {
+			if (dist_primary[i] == INT_MAX) printf("Vertex %d \t INF\n", i);
+			else printf("Vertex %d \t %d\n", i , dist_primary[i]);
+		}
 	}
-	// }
 
 	// freeing allocated memory 
 	for (int i = 0; i < V; i++) free(gMatrix->matrix[i]);
@@ -295,7 +300,7 @@ int main() {
 	int num_dense_edges_2 = sizeof(dense_edges_2) / sizeof(dense_edges_2[0]);
 	evaluate_graph(V_dense_2, dense_edges_2, num_dense_edges_2, 0);
 
-	// Dense Graph 3
+	// Dense Graph 3 (Large)
 	int V_dense_3 = 100;
 	int num_dense_edges_3 = 0;
 	int max_edges_3 = ((V_dense_3) * (V_dense_3 - 1)) / 2;
@@ -313,5 +318,6 @@ int main() {
 	evaluate_graph(V_dense_3, dense_edges_3, num_dense_edges_3, 0);
 	free(dense_edges_3);
 
-	return 0;
+	// For theoretical experimentation
+	
 }
